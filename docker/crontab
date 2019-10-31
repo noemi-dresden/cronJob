@@ -1,1 +1,2 @@
-0 0 * * * root /remove_old_data.sh index-1 index-2 >> /var/log/cron.log
+*/5 * * * * root /job.sh index-1 index-2 >> /var/log/cron.log
+# empty line here
