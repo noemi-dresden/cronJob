@@ -1,0 +1,29 @@
+kind: CronJob
+apiVersion: batch/v1beta1
+metadata:
+  name: super-name
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          hostname: super-name
+          containers:
+          - name: super-name
+            image: your-repository/super-name:latest
+            env:
+              - name: MY_ENV_VARIABLE
+                valueFrom:
+                  configMapKeyRef:
+                    name: my-config
+                    key: myEnvVariable
+          restartPolicy: OnFailure
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: my-config
+data:
+  myEnvVariable: the-value-of-the-env-variable
+---
